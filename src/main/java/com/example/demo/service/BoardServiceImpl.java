@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Member;
+import com.example.demo.model.Board;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -14,42 +14,42 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService {
+public class BoardServiceImpl implements BoardService {
+
+	public static final String COLLECTION_NAME="Board";
 	
-	public static final String COLLECTION_NAME="Member";
-	
-	@Override
-    public String insertMember(Member member) throws Exception {
+    @Override
+	public String insertBoard(Board board) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
-           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(member.getId()).set(member);
+           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document().set(board);
            return apiFuture.get().getUpdateTime().toString();
     }
 
     @Override
-    public Member getMemberDetail(String id) throws Exception {
+    public Board getBoardDetail(String id) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
            DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(id);
            ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
            DocumentSnapshot documentSnapshot = apiFuture.get();
-           Member member = null;
+           Board board = null;
 
            if(documentSnapshot.exists()) {
-                   member = documentSnapshot.toObject(Member.class);
-                   return member;
+        	   board = documentSnapshot.toObject(Board.class);
+                   return board;
            } else {
                    return null;
            }
     }
 
     @Override
-    public String updateMember(Member member) throws Exception {
+    public String updateBoard(Board board) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
-           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(member.getId()).set(member);
+           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document().set(board);
            return apiFuture.get().getUpdateTime().toString();
     }
 
     @Override
-    public String deleteMember(String id) throws Exception {
+    public String deleteBoard(String id) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
            ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(id).delete();         
            return "Document id :" + id + " delete";

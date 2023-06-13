@@ -9,13 +9,15 @@ import lombok.ToString;
 @ToString
 public class Board {
 
+	private String id;
+	private String writter;
 	private String title;
 	private String content;
 	private String user_count;
 	private String bar_name;
 	private String bar_addr;
 	
-	private String meetdate;
-	private String regdate;
+//	private String meetdate;
+//	private String regdate;
 	
 }

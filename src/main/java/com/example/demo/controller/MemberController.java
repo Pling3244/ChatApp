@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,22 +15,11 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/test")
+@RequestMapping("")
 public class MemberController {
 
+	@Autowired
     private final MemberService memberService;
-
-//    @GetMapping("/users")
-//    public ResponseEntity<Object>  getUsers() throws ExecutionException, InterruptedException {
-//        List<Member> list = memberService.getMember();
-//        return ResponseEntity.ok().body(list);
-//
-//    }
-    
-//    @PostMapping("/insertMember")
-//    public String insertMember(@RequestParam Member member) throws Exception {
-//           return memberService.insertMember(member);
-//    }
     
     @PostMapping("/insertMember")
     public String insertMember(@RequestParam String id, String pw, String nickname) throws Exception {
