@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Bar;
 import com.example.demo.model.Board;
 
 public interface BarService {
 
-	public Board getBarDetail(String id) throws Exception;
+	public Bar getBarDetail(String id) throws Exception;
 }

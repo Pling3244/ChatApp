@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Board;
+import com.example.demo.model.Bar;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -18,16 +18,16 @@ public class BarServiceImpl implements BarService {
 	public static final String COLLECTION_NAME="FoodApi";
 			
 			@Override
-		    public Board getBarDetail(String id) throws Exception {
+		    public Bar getBarDetail(String id) throws Exception {
 		           Firestore firestore = FirestoreClient.getFirestore();
 		           DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(id);
 		           ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
 		           DocumentSnapshot documentSnapshot = apiFuture.get();
-		           Board board = null;
+		           Bar bar = null;
 
 		           if(documentSnapshot.exists()) {
-		        	   board = documentSnapshot.toObject(Board.class);
-		                   return board;
+		        	   bar = documentSnapshot.toObject(Bar.class);
+		                   return bar;
 		           } else {
 		                   return null;
 		           }
