@@ -42,9 +42,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public String updateBoard(Board board) throws Exception {
+    public String updateBoard(String id, Board board) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
-           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document().set(board);
+           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(id).set(board);
            return apiFuture.get().getUpdateTime().toString();
     }
 

@@ -38,7 +38,7 @@ public class BoardController {
     }
 
     @PostMapping("/updateBoard")
-    public String updateBoard(@RequestParam String writter, String title, String content, String user_count, String bar_name, String bar_addr) throws Exception {
+    public String updateBoard(@RequestParam String id, String writter, String title, String content, String user_count, String bar_name, String bar_addr) throws Exception {
     	Board board = new Board();
 		board.setWritter(writter);
 		board.setTitle(title);
@@ -46,7 +46,7 @@ public class BoardController {
 		board.setUser_count(user_count);
 		board.setBar_name(bar_name);
 		board.setBar_addr(bar_addr);
-           return boardService.updateBoard(board);
+           return boardService.updateBoard(id, board);
     }
 
     @GetMapping("/deleteBoard")

@@ -8,7 +8,7 @@ public interface BoardService {
 
     public Board getBoardDetail(String id) throws Exception;
     
-    public String updateBoard(Board board) throws Exception;
+    public String updateBoard(String id, Board board) throws Exception;
 
     public String deleteBoard(String id) throws Exception;
 
