@@ -16,8 +16,8 @@ public class Bar {
 	private String GUGUN_NM;
 	private String HOMEPAGE_URL;
 	private String ITEMCNTNTS;
-	private String LAT;
-	private String LNG;
+	private double LAT;
+	private double LNG;
 	private String MAIN_IMG_NORMAL;
 	private String MAIN_IMG_THUMB;
 	private String MAIN_TITLE;
@@ -25,6 +25,6 @@ public class Bar {
 	private String RPRSNTV_MENU;
 	private String SUBTITLE;
 	private String TITLE;
-	private String UC_SEQ;
+	private Long UC_SEQ;
 	private String USAGE_DAY_WEEK_AND_TIME;
 }

@@ -3,11 +3,12 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.LoginResponse;
 import com.example.demo.model.Member;
 import com.example.demo.service.MemberService;
 
@@ -29,6 +30,24 @@ public class MemberController {
     	member.setNickname(nickname);
            return memberService.insertMember(member);
     }
+    
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody Member member) throws Exception {
+       
+        System.out.println("Incoming data - Member: " + member);
+        LoginResponse response = new LoginResponse();
+
+        boolean loginSuccessful = memberService.verifyLogin(member.getId(), member.getPw());;
+
+        if (loginSuccessful) {
+            response.setMessage("Login successful");
+        } else {
+            response.setMessage("Login failed");
+        }
+
+        return response;
+    }
+
 
     @GetMapping("/getMemberDetail")
     public Member getMemberDetail(@RequestParam String id) throws Exception {

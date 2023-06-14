@@ -5,6 +5,8 @@ import com.example.demo.model.Member;
 public interface MemberService {
 
 	public String insertMember(Member member) throws Exception;
+	
+	boolean verifyLogin(String id, String pw);
 
     public Member getMemberDetail(String id) throws Exception;
 

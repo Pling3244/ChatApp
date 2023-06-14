@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Bar;
-import com.example.demo.model.Board;
 
 public interface BarService {
 
