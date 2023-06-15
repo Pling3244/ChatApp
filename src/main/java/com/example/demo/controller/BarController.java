@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +24,12 @@ public class BarController {
     public Bar getBarDetail(@RequestParam String id) throws Exception {
            return barService.getBarDetail(id);
     }
+	
+	// 모든 리뷰 리스트
+	   @GetMapping("/bars")
+	    public List<Bar> getAllBars()throws Exception {
+	      List<Bar> test = barService.getAllBars();
+	         return test;
+	   }
+
 }
