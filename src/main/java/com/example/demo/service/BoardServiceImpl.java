@@ -1,12 +1,17 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Board;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 
@@ -18,10 +23,30 @@ public class BoardServiceImpl implements BoardService {
 
 	public static final String COLLECTION_NAME="Board";
 	
+	@Override
+    public List<Board> getAllBoard() throws Exception {
+        Firestore firestore = FirestoreClient.getFirestore();
+        CollectionReference collectionReference = firestore.collection(COLLECTION_NAME);
+        ApiFuture<QuerySnapshot> querySnapshot = collectionReference.get();
+        List<Board> boardList = new ArrayList<>();
+
+        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+           Board board = document.toObject(Board.class);
+           board.setMeetdate(board.getMeetdate().toString());
+            board.setRegdate(board.getRegdate().toString());
+            boardList.add(board);
+        }
+
+        return boardList;
+    }
+	
     @Override
 	public String insertBoard(Board board) throws Exception {
            Firestore firestore = FirestoreClient.getFirestore();
-           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document().set(board);
+           DocumentReference addedDocRef = firestore.collection(COLLECTION_NAME).document();
+           String id = addedDocRef.getId();
+           board.setBoardid(id);
+           ApiFuture<WriteResult> apiFuture = addedDocRef.set(board);          
            return apiFuture.get().getUpdateTime().toString();
     }
 

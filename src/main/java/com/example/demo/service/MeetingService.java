@@ -3,33 +3,29 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.model.Meeting;
+import com.example.demo.model.Member;
+import com.example.demo.model.Message;
+
 
 
 public interface MeetingService {
 
 	
-	public List<Meeting> getMeetingList();
+	public List<Meeting> getMeetingByNickname(String nickname);
 
 	public String insertMeeting(Meeting meeting);
 
-	public Meeting getOneMeeting(String id);
+	public Meeting getOneMeeting(String meeting_id);
 	
-	public String deleteMeeting(String id);
+	public String deleteMeeting(String meeting_id);
 	
-	public String updateMeeting(String id, Meeting meeting);
+	public String updateMeeting(String meeting_id, Meeting meeting);
 	
-//	public void insertUserinmeeting(Userinmeeting userinmeeting);
-//	
-//	public Userinmeeting getOneUserinmeeting(String userinmeeting_val); 
-//	
-//	
-//	public List<User> getChatMemberList(int meeting_id); 
+	public String addMember(String meeting_id, Member member);
 	
+	public String removeMember(String meeting_id, Member member);
 	
-	
-	public void deleteUserinmeeting(String email, int meeting_id);
-	
-	
-	
+	public String addMessage(String meeting_id, Message message);
+
 	
 }

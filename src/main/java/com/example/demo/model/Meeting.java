@@ -1,5 +1,8 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,14 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Meeting {
 
-	private String id;
+	private String meeting_id;
 	private String meeting_title;
 	private String meeting_content;
-	private String user;
-	private String start_date;
-	private String end_date;
-	private String meeting_place_name;
-	private String meeting_place_spot;
-	private String meeting_place_imgurl;
-
+	private List<Member> user;
+	private String date;
+	
+	private List<Message> messages;
+		
+	public List<Member> getUser() {
+        if (user == null) {
+            user = new ArrayList<>();
+        }
+        return user;
+    }	
 }

@@ -1,8 +1,12 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import com.example.demo.model.Board;
 
 public interface BoardService {
+	
+	public List<Board> getAllBoard() throws Exception;
 
 	public String insertBoard(Board board) throws Exception;
 

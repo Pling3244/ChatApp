@@ -25,6 +25,7 @@ public class BarServiceImpl implements BarService {
 			@Override
 		    public Bar getBarDetail(String id) throws Exception {
 		           Firestore firestore = FirestoreClient.getFirestore();
+		           DocumentReference addedDocRef = firestore.collection(COLLECTION_NAME).document();
 		           DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(id);
 		           ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
 		           DocumentSnapshot documentSnapshot = apiFuture.get();

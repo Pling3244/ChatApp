@@ -9,10 +9,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Data
 @ToString
-public class Member {
+public class Message {
 
-    private String id;
-    private String pw;
-    private String nickname;
-
+	private String sender;
+    private String content;
 }
