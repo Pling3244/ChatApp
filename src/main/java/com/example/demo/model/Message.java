@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class Message {
 
-	private String sender;
+	private String nickname;
     private String content;
+    private String time;
 }
