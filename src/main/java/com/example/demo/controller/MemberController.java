@@ -33,16 +33,29 @@ public class MemberController {
     
     @PostMapping("/login")
     public LoginResponse login(@RequestBody Member member) throws Exception {
-       
-        System.out.println("Incoming data - Member: " + member);
         LoginResponse response = new LoginResponse();
 
-        boolean loginSuccessful = memberService.verifyLogin(member.getId(), member.getPw());;
+        System.out.println("Incoming id: " + member.getId());
+        System.out.println("Incoming pw: " + member.getPw());
+
+        boolean loginSuccessful = memberService.verifyLogin(member.getId(), member.getPw());
 
         if (loginSuccessful) {
+            response.setStatus("success");
             response.setMessage("Login successful");
+            response.setSessionId(member.getId());
+            response.setSessionPw(member.getPw());
+
+            // 추가: 닉네임 값 가져오기
+            String nickname = memberService.getNickname(member.getId());
+            response.setSessionNickname(nickname);
+            System.out.println("Incoming nickname: " + nickname);
         } else {
+            response.setStatus("fail");
             response.setMessage("Login failed");
+            response.setSessionId("");
+            response.setSessionPw("");
+            response.setSessionNickname("");
         }
 
         return response;

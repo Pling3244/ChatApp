@@ -47,11 +47,9 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public String insertMeeting(Meeting meeting) {
+	public String insertMeeting(String boardid, Meeting meeting) {
 		Firestore firestore = FirestoreClient.getFirestore();
-		DocumentReference addedDocRef = firestore.collection(COLLECTION_NAME).document();
-		String meeting_id = addedDocRef.getId();
-        meeting.setMeeting_id(meeting_id);
+		DocumentReference addedDocRef = firestore.collection(COLLECTION_NAME).document(boardid);
         ApiFuture<WriteResult> apiFuture = addedDocRef.set(meeting);
         try {
 			return apiFuture.get().getUpdateTime().toString();
@@ -65,9 +63,9 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Meeting getOneMeeting(String meeting_id) {
+	public Meeting getOneMeeting(String boardid) {
 		Firestore firestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(meeting_id);
+        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(boardid);
         ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = null;
 		try {
@@ -92,17 +90,17 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 	
 	@Override
-    public String deleteMeeting(String meeting_id) {
+    public String deleteMeeting(String boardid) {
            Firestore firestore = FirestoreClient.getFirestore();
-           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(meeting_id).delete();         
-           return "Meeting id :" + meeting_id + " delete";
+           ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document(boardid).delete();         
+           return "Meeting id :" + boardid + " delete";
     }
 	
 	@Override
-	public String updateMeeting(String meeting_id, Meeting meeting) {
+	public String updateMeeting(String boardid, Meeting meeting) {
 		Firestore firestore = FirestoreClient.getFirestore();
-		DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(meeting_id);
-		Meeting beforeMeeting = getOneMeeting(meeting_id);		
+		DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(boardid);
+		Meeting beforeMeeting = getOneMeeting(boardid);		
 		beforeMeeting.setMeeting_title(meeting.getMeeting_title());
 		beforeMeeting.setMeeting_content(meeting.getMeeting_content());		
 		ApiFuture<WriteResult> apiFuture = documentReference.set(beforeMeeting);				
@@ -115,9 +113,9 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-    public String addMember(String meeting_id, Member member) {
+    public String addMember(String boardid, Member member) {
         Firestore firestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(meeting_id);
+        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(boardid);
 
         // Get the meeting document
         ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
@@ -149,9 +147,9 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
 	@Override
-    public String removeMember(String meeting_id, Member member) {
+    public String removeMember(String boardid, Member member) {
         Firestore firestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(meeting_id);
+        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(boardid);
 
         // Get the meeting document
         ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
@@ -187,9 +185,9 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
 	@Override
-    public String addMessage(String meeting_id, Message message) {
+    public String addMessage(String boardid, Message message) {
         Firestore firestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(meeting_id);
+        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(boardid);
 
         // Get the meeting document
         ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();

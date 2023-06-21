@@ -31,37 +31,37 @@ public class MeetingController {
 	}
 	
 	@PostMapping("/insertMeeting")
-	public String insertMeeting(@RequestBody Meeting meeting) {
-       return meetingService.insertMeeting(meeting);	
+	public String insertMeeting(@RequestParam String boardid, @RequestBody Meeting meeting) {
+       return meetingService.insertMeeting(boardid, meeting);	
 	}
 	
 	@GetMapping("/getOneMeeting")
-	public Meeting getOneMeeting(@RequestParam String meeting_id) {
-	       return meetingService.getOneMeeting(meeting_id);
+	public Meeting getOneMeeting(@RequestParam String boardid) {
+	       return meetingService.getOneMeeting(boardid);
 	}
 	 
 	@GetMapping("/deleteMeeting")
-    public String deleteMeeting(@RequestParam String meeting_id)  {
-           return meetingService.deleteMeeting(meeting_id);
+    public String deleteMeeting(@RequestParam String boardid)  {
+           return meetingService.deleteMeeting(boardid);
     }
 	
 	@PostMapping("/updateMeeting")
-	public String updateMeeting(@RequestParam String meeting_id, @RequestBody Meeting meeting) {
-		return meetingService.updateMeeting(meeting_id, meeting);
+	public String updateMeeting(@RequestParam String boardid, @RequestBody Meeting meeting) {
+		return meetingService.updateMeeting(boardid, meeting);
 	}
 	
 	@PostMapping("/addMember")
-    public String addMember(@RequestParam String meeting_id, @RequestBody Member member) {
-        return meetingService.addMember(meeting_id, member);
+    public String addMember(@RequestParam String boardid, @RequestBody Member member) {
+        return meetingService.addMember(boardid, member);
     }
 
     @PostMapping("/removeMember")
-    public String removeMember(@RequestParam String meeting_id, @RequestBody Member member) {
-        return meetingService.removeMember(meeting_id, member);
+    public String removeMember(@RequestParam String boardid, @RequestBody Member member) {
+        return meetingService.removeMember(boardid, member);
     }
 
     @PostMapping("/addMessage")
-    public String addMessage(@RequestParam String meeting_id, @RequestBody Message message) {
-        return meetingService.addMessage(meeting_id, message);
+    public String addMessage(@RequestParam String boardid, @RequestBody Message message) {
+        return meetingService.addMessage(boardid, message);
     }
 }

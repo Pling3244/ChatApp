@@ -13,19 +13,19 @@ public interface MeetingService {
 	
 	public List<Meeting> getMeetingByNickname(String nickname);
 
-	public String insertMeeting(Meeting meeting);
+	public String insertMeeting(String boardid, Meeting meeting);
 
-	public Meeting getOneMeeting(String meeting_id);
+	public Meeting getOneMeeting(String boardid);
 	
-	public String deleteMeeting(String meeting_id);
+	public String deleteMeeting(String boardid);
 	
-	public String updateMeeting(String meeting_id, Meeting meeting);
+	public String updateMeeting(String boardid, Meeting meeting);
 	
-	public String addMember(String meeting_id, Member member);
+	public String addMember(String boardid, Member member);
 	
-	public String removeMember(String meeting_id, Member member);
+	public String removeMember(String boardid, Member member);
 	
-	public String addMessage(String meeting_id, Message message);
+	public String addMessage(String boardid, Message message);
 
 	
 }

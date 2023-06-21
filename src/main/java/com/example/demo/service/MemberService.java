@@ -14,4 +14,6 @@ public interface MemberService {
 
     public String deleteMember(String id) throws Exception;
     
+    public String getNickname(String id) throws Exception;
+    
 }

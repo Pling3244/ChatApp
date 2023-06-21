@@ -48,6 +48,22 @@ public class MemberServiceImpl implements MemberService {
             return false;
         }
     }
+	
+	@Override
+    public String getNickname(String id) throws Exception {
+        Firestore firestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = firestore.collection(COLLECTION_NAME).document(id);
+        ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
+        DocumentSnapshot documentSnapshot = apiFuture.get();
+        Member member = null;
+
+        if (documentSnapshot.exists()) {
+            member = documentSnapshot.toObject(Member.class);
+            return member.getNickname();
+        } else {
+            return "DefaultNickname"; // 기본값 설정
+        }
+    }
 
 
     @Override
